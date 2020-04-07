@@ -10,25 +10,26 @@
         <!--Weather View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LSIWeatherViewController" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="LSIWeatherViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yBF-wB-ueM">
-                                <rect key="frame" x="0.0" y="44" width="414" height="359"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="359"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OWa-AI-tG6">
-                                <rect key="frame" x="0.0" y="403" width="414" height="459"/>
+                                <rect key="frame" x="0.0" y="359" width="414" height="537"/>
                                 <color key="backgroundColor" red="0.10885646514836654" green="0.26660722956765481" blue="0.73719067258883242" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.10885646509999999" green="0.2666072296" blue="0.73719067260000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="OWa-AI-tG6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2PA-hg-ZeU"/>
-                            <constraint firstItem="yBF-wB-ueM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="4Xf-74-Ehc"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="OWa-AI-tG6" secondAttribute="bottom" id="9ZX-VY-yD2"/>
+                            <constraint firstItem="yBF-wB-ueM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4Xf-74-Ehc"/>
+                            <constraint firstAttribute="bottom" secondItem="OWa-AI-tG6" secondAttribute="bottom" id="9ZX-VY-yD2"/>
                             <constraint firstItem="OWa-AI-tG6" firstAttribute="top" secondItem="yBF-wB-ueM" secondAttribute="bottom" id="XYO-oE-bkm"/>
                             <constraint firstItem="yBF-wB-ueM" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.4" constant="0.40000000000000002" id="awY-U7-G0o"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yBF-wB-ueM" secondAttribute="trailing" id="ewI-oE-gs0"/>
@@ -37,6 +38,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
