@@ -188,11 +188,28 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KhQ-vd-k37">
+                                        <rect key="frame" x="334" y="457" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="WTn-Sh-ZVj"/>
+                                            <constraint firstAttribute="width" constant="40" id="Z4E-xW-ZDQ"/>
+                                        </constraints>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="MAi-Yo-ued">
+                                        <rect key="frame" x="334" y="457.5" width="40" height="39"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="IHm-gd-7Pw"/>
+                                            <constraint firstAttribute="height" constant="40" id="NZj-2P-IhO"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.3411764705882353" blue="0.71372549019607845" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.10885646509999999" green="0.2666072296" blue="0.73719067260000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="KhQ-vd-k37" secondAttribute="bottom" constant="40" id="1ox-Pa-ZjS"/>
                                     <constraint firstItem="KHG-LF-PZ0" firstAttribute="leading" secondItem="OWa-AI-tG6" secondAttribute="leading" constant="20" id="79C-bg-oZY"/>
+                                    <constraint firstAttribute="trailing" secondItem="KhQ-vd-k37" secondAttribute="trailing" constant="40" id="DMP-cK-cN5"/>
                                     <constraint firstAttribute="trailing" secondItem="k1G-8L-sWK" secondAttribute="trailing" constant="20" id="HJZ-Vm-NAK"/>
                                     <constraint firstItem="k1G-8L-sWK" firstAttribute="leading" secondItem="OWa-AI-tG6" secondAttribute="leading" constant="20" id="Lnn-Rr-Lu0"/>
                                     <constraint firstItem="k1G-8L-sWK" firstAttribute="top" secondItem="8yj-Ue-Tfn" secondAttribute="bottom" constant="20" id="SnC-gX-vaq"/>
@@ -200,7 +217,9 @@
                                     <constraint firstItem="8yj-Ue-Tfn" firstAttribute="top" secondItem="OWa-AI-tG6" secondAttribute="top" constant="20" id="X5d-WT-v0J"/>
                                     <constraint firstItem="8yj-Ue-Tfn" firstAttribute="leading" secondItem="OWa-AI-tG6" secondAttribute="leading" constant="20" id="jT8-gL-vva"/>
                                     <constraint firstAttribute="trailing" secondItem="KHG-LF-PZ0" secondAttribute="trailing" constant="20" id="qm3-0v-roL"/>
+                                    <constraint firstAttribute="bottom" secondItem="MAi-Yo-ued" secondAttribute="bottom" constant="40" id="tVe-Jz-ZCS"/>
                                     <constraint firstItem="KHG-LF-PZ0" firstAttribute="top" secondItem="k1G-8L-sWK" secondAttribute="bottom" constant="20" id="u5w-ao-5FV"/>
+                                    <constraint firstAttribute="trailing" secondItem="MAi-Yo-ued" secondAttribute="trailing" constant="40" id="wZE-Pq-qif"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -274,5 +293,6 @@
     </scenes>
     <resources>
         <image name="clear-day" width="130" height="130"/>
+        <image name="info.circle.fill" catalog="system" width="128" height="121"/>
     </resources>
 </document>
