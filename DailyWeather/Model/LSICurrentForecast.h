@@ -40,7 +40,6 @@ NS_ASSUME_NONNULL_BEGIN
                      uvIndex:(NSNumber *)uvIndex;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
-
 @end
 
 NS_ASSUME_NONNULL_END
