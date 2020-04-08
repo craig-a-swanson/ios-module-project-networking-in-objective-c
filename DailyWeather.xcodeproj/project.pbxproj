@@ -102,13 +102,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		445DCA98243D2E3B008FA840 /* Model */ = {
+		445DCAAF243E3C6B008FA840 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				445DCA95243D2E31008FA840 /* LSICurrentForecast.h */,
 				445DCA96243D2E31008FA840 /* LSICurrentForecast.m */,
 			);
-			path = Model;
+			name = Model;
 			sourceTree = "<group>";
 		};
 		BD69312923FD905200C0DF09 = {
@@ -137,8 +137,8 @@
 				BD69313823FD905200C0DF09 /* SceneDelegate.h */,
 				BD69313923FD905200C0DF09 /* SceneDelegate.m */,
 				BD69317423FD91D700C0DF09 /* Main.storyboard */,
+				445DCAAF243E3C6B008FA840 /* Model */,
 				BDFC8F6123FD94F600A39B21 /* View Controllers */,
-				445DCA98243D2E3B008FA840 /* Model */,
 				BDFC8F6223FD950900A39B21 /* Helpers */,
 				BDFC8F6323FD958300A39B21 /* JSON */,
 				BD69316B23FD90D500C0DF09 /* LambdaSDK */,

@@ -8,16 +8,33 @@
 #import <CoreLocation/CoreLocation.h>
 #import "LSIWeatherViewController.h"
 #import "LSIWeatherIcons.h"
+#import "LSIFileHelper.h"
 #import "LSIErrors.h"
 #import "LSILog.h"
+#import "LSICurrentForecast.h"
 
 @interface LSIWeatherViewController () {
     BOOL _requestedLocation;
 }
 
+// MARK: - Properties
 @property CLLocationManager *locationManager;
 @property CLLocation *location;
 @property (nonatomic) CLPlacemark *placemark;
+@property (nonatomic) LSICurrentForecast *currentForecast;
+
+// MARK: - Outlets
+@property (strong, nonatomic) IBOutlet UIImageView *iconImage;
+@property (strong, nonatomic) IBOutlet UILabel *cityStateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *summaryLabel;
+@property (strong, nonatomic) IBOutlet UILabel *temperatureLabel;
+@property (strong, nonatomic) IBOutlet UILabel *windSpeedLabel;
+@property (strong, nonatomic) IBOutlet UILabel *apparentTempLabel;
+@property (strong, nonatomic) IBOutlet UILabel *humidityLabel;
+@property (strong, nonatomic) IBOutlet UILabel *pressureLabel;
+@property (strong, nonatomic) IBOutlet UILabel *precipProbabilityLabel;
+@property (strong, nonatomic) IBOutlet UILabel *uvIndexLabel;
+
 
 @end
 
@@ -49,7 +66,7 @@
     return self;
 }
 
-
+// MARK: - View Controller Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -114,7 +131,19 @@
 - (void)requestWeatherForLocation:(CLLocation *)location {
     
     // TODO: 1. Parse CurrentWeather.json from App Bundle and update UI
+    NSData *data = loadFile(@"CurrentWeather.json", [LSIWeatherViewController class]);
     
+    NSError *error = nil;
+    NSDictionary *currentWeatherJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    
+    if (error) {
+        NSLog(@"Error parsing json: %@", error);
+    }
+    NSLog(@"JSON: %@:", currentWeatherJson);
+    LSICurrentForecast *currentWeather = [[LSICurrentForecast alloc] initWithDictionary:currentWeatherJson];
+    
+    self.currentForecast = currentWeather;
+    [self updateViews];
     
     
     
@@ -124,9 +153,15 @@
 - (void)updateViews {
     if (self.placemark) {
         // TODO: Update the City, State label
+        NSString *city = _placemark.locality;
+        NSString *state = _placemark.administrativeArea;
+        NSString *cityState = [NSString stringWithFormat:@"%@, %@", city, state];
+        _cityStateLabel.text = cityState;
     }
-    
     // TODO: Update the UI based on the current forecast
+    _iconImage.image = [LSIWeatherIcons weatherImageForIconName:_currentForecast.icon];
+    _summaryLabel.text = _currentForecast.summary;
+    _temperatureLabel.text = [NSString stringWithFormat:@"%@℉", _currentForecast.temperature];
 }
 
 @end

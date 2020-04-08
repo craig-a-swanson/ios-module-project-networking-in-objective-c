@@ -238,6 +238,18 @@
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="apparentTempLabel" destination="Na9-0i-chT" id="rhp-kp-e3g"/>
+                        <outlet property="cityStateLabel" destination="S8Q-6p-38a" id="Xvn-Cs-Gkj"/>
+                        <outlet property="humidityLabel" destination="ESF-kj-Fka" id="taE-vr-cxJ"/>
+                        <outlet property="iconImage" destination="da9-N6-zDT" id="GjQ-M8-wxj"/>
+                        <outlet property="precipProbabilityLabel" destination="0Jc-BI-v1Y" id="4Bx-Qw-awW"/>
+                        <outlet property="pressureLabel" destination="PJc-qb-gSi" id="6G8-WR-DsV"/>
+                        <outlet property="summaryLabel" destination="AfK-Zl-Cuv" id="NqZ-Fq-35K"/>
+                        <outlet property="temperatureLabel" destination="X97-P8-zL0" id="Twc-M8-30s"/>
+                        <outlet property="uvIndexLabel" destination="dKT-KM-wur" id="L9D-kB-5JN"/>
+                        <outlet property="windSpeedLabel" destination="EAr-Y7-08t" id="TqD-xl-btN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
