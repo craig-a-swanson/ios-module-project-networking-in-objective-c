@@ -8,6 +8,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "LSIWeatherViewController.h"
 #import "LSIWeatherIcons.h"
+#import "LSICardinalDirection.h"
 #import "LSIFileHelper.h"
 #import "LSIErrors.h"
 #import "LSILog.h"
@@ -159,9 +160,25 @@
         _cityStateLabel.text = cityState;
     }
     // TODO: Update the UI based on the current forecast
+    // Top View
     _iconImage.image = [LSIWeatherIcons weatherImageForIconName:_currentForecast.icon];
     _summaryLabel.text = _currentForecast.summary;
-    _temperatureLabel.text = [NSString stringWithFormat:@"%@℉", _currentForecast.temperature];
+    _temperatureLabel.text = [NSString stringWithFormat:@"%d℉", _currentForecast.temperature.intValue];
+    
+    // Bottom View
+    NSString *bearing = [LSICardinalDirection directionForHeading:_currentForecast.windBearing.doubleValue];
+    NSString *windData = [NSString stringWithFormat:@"%@ %dmph", bearing, _currentForecast.windSpeed.intValue];
+    _windSpeedLabel.text = windData;
+    _apparentTempLabel.text = [NSString stringWithFormat:@"%d℉", _currentForecast.apparentTemperature.intValue];
+    double humidityDouble = (_currentForecast.humidity.doubleValue * 100.0);
+    _humidityLabel.text = [NSString stringWithFormat:@"%0.0f%%", humidityDouble];
+    double inchesMercury = (_currentForecast.pressure.doubleValue * 0.029529980);
+    _pressureLabel.text = [NSString stringWithFormat:@"%0.2f inHG", inchesMercury];
+    double precipChanceDouble = (_currentForecast.precipProbability.doubleValue * 100.0);
+    _precipProbabilityLabel.text = [NSString stringWithFormat:@"%0.0f%%", precipChanceDouble];
+    _uvIndexLabel.text = [NSString stringWithFormat:@"%@", _currentForecast.uvIndex];
+    
+    
 }
 
 @end
