@@ -49,8 +49,6 @@
 
 @implementation LSIWeatherViewController
 
-
-
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
@@ -140,7 +138,6 @@
     if (error) {
         NSLog(@"Error parsing json: %@", error);
     }
-    NSLog(@"JSON: %@:", currentWeatherJson);
     LSICurrentForecast *currentWeather = [[LSICurrentForecast alloc] initWithDictionary:currentWeatherJson];
     
     self.currentForecast = currentWeather;
@@ -149,6 +146,11 @@
     
     
     // TODO: 2. Refactor and Parse Weather.json from App Bundle and update UI
+    NSData *weatherData = loadFile(@"Weather.json", [LSIWeatherViewController class]);
+    
+    NSError *weatherError = nil;
+    
+    
 }
 
 - (void)updateViews {

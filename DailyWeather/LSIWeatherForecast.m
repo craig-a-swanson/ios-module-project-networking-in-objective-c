@@ -7,8 +7,7 @@
 //
 
 #import "LSIWeatherForecast.h"
-
-@class LSICurrentForecast;
+#import "LSICurrentForecast.h"
 
 @implementation LSIWeatherForecast
 
