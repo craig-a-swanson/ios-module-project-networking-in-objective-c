@@ -17,9 +17,8 @@
 
 @implementation DailyWeatherTests
 
-- (void)testExample {
+- (void)testDailyWeatherParse {
 
-    // TODO: Use LSIFileHelper to load JSON from your test bundle
     NSData *dailyData = loadFile(@"DailyWeather.json", [DailyWeatherTests class]);
     
     NSError *jsonError = nil;
@@ -38,6 +37,39 @@
     
     // TODO: Create Unit Tests for each separate JSON file
 
+}
+
+- (void)testHourlyWeatherParse {
+    
+    NSData *hourlyData = loadFile(@"HourlyWeather.json", [DailyWeatherTests class]);
+    
+    NSError *jsonError = nil;
+    NSArray *json = [NSJSONSerialization JSONObjectWithData:hourlyData options:0 error:&jsonError];
+    if (jsonError) {
+        NSLog(@"JSON Parsing error: %@:", jsonError);
+    }
+    
+    LSIDailyForecast *hourlyForecast = [[LSIDailyForecast alloc] initWithArray:json];
+    XCTAssertNotNil(hourlyForecast);
+    XCTAssertEqual(49, hourlyForecast.dailies.count);
+    
+    LSICurrentForecast *hourFour = hourlyForecast.dailies[3];
+    XCTAssertEqual(2.86, hourFour.windSpeed.doubleValue);
+}
+
+- (void)testHourlyPrecipTypeIsNull {
+    
+    NSData *hourlyData = loadFile(@"HourlyWeather.json", [DailyWeatherTests class]);
+    
+    NSError *jsonError = nil;
+    NSArray *json = [NSJSONSerialization JSONObjectWithData:hourlyData options:0 error:&jsonError];
+    if (jsonError) {
+        NSLog(@"JSON Parsing error: %@:", jsonError);
+    }
+    
+    LSIDailyForecast *hourlyForecast = [[LSIDailyForecast alloc] initWithArray:json];
+    LSICurrentForecast *hourOne = hourlyForecast.dailies[0];
+    XCTAssertNil(hourOne.precipType);
 }
 
 @end
