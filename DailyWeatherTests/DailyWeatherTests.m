@@ -25,7 +25,7 @@
     NSError *jsonError = nil;
     NSArray *json = [NSJSONSerialization JSONObjectWithData:dailyData options:0 error:&jsonError];
     if (jsonError) {
-        NSLog(@"JSON Parsin error: %@:", jsonError);
+        NSLog(@"JSON Parsing error: %@:", jsonError);
     }
     
     LSIDailyForecast *dailyForecast = [[LSIDailyForecast alloc] initWithArray:json];
