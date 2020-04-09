@@ -21,7 +21,15 @@
                     pressure:(NSNumber *)pressure
                    windSpeed:(NSNumber *)windSpeed
                  windBearing:(NSNumber *)windBearing
-                     uvIndex:(NSNumber *)uvIndex {
+                     uvIndex:(NSNumber *)uvIndex
+// refactoring
+                 sunriseTime:(NSDate *)sunriseTime
+                  sunsetTime:(NSDate *)sunsetTime
+                  precipType:(NSString *)precipType
+              temperatureLow:(NSNumber *)temperatureLow
+             temperatureHigh:(NSNumber *)temperatureHigh
+      apparentTemperatureLow:(NSNumber *)apparentTemperatureLow
+     apparentTemperatureHigh:(NSNumber *)apparentTemperatureHigh {
     if (self = [super init]) {
         _time = time;
         _summary = [summary copy];
@@ -35,6 +43,14 @@
         _windSpeed = windSpeed;
         _windBearing = windBearing;
         _uvIndex = uvIndex;
+// refactoring
+        _sunriseTime = sunriseTime;
+        _sunsetTime = sunsetTime;
+        _precipType = precipType;
+        _temperatureLow = temperatureLow;
+        _temperatureHigh = temperatureHigh;
+        _apparentTemperatureLow = apparentTemperatureLow;
+        _apparentTemperatureHigh = apparentTemperatureHigh;
     }
     return self;
 }
@@ -52,6 +68,14 @@
     NSNumber *windSpeed = dictionary[@"windSpeed"];
     NSNumber *windBearing = dictionary[@"windBearing"];
     NSNumber *uvIndex = dictionary[@"uvIndex"];
+// refactoring
+    NSNumber *sunriseTimeNumber = dictionary[@"sunriseTime"];
+    NSNumber *sunsetTimeNumber = dictionary[@"sunsetTime"];
+    NSString *precipType = dictionary[@"precipType"];
+    NSNumber *temperatureLow = dictionary[@"temperatureLow"];
+    NSNumber *temperatureHigh = dictionary[@"temperatureHigh"];
+    NSNumber *apparentTemperatureLow = dictionary[@"apparentTemperatureLow"];
+    NSNumber *apparentTemperatureHigh = dictionary[@"apparentTemperatureHigh"];
     
     if (!timeNumber) {
         return nil;
@@ -91,8 +115,34 @@
     if ([uvIndex isKindOfClass:[NSNull class]]) {
         uvIndex = nil;
     }
+// refactoring
+    if (!sunriseTimeNumber) {
+        _sunriseTime = nil;
+    } else {
+        _sunriseTime = [NSDate dateWithTimeIntervalSince1970:sunriseTimeNumber.longValue];
+    }
+    if (!sunsetTimeNumber) {
+        _sunsetTime = nil;
+    } else {
+        _sunsetTime = [NSDate dateWithTimeIntervalSince1970:sunsetTimeNumber.longValue];
+    }
+    if ([precipType isKindOfClass:[NSNull class]]) {
+        precipType = nil;
+    }
+    if ([temperatureLow isKindOfClass:[NSNull class]]) {
+        temperatureLow = nil;
+    }
+    if ([temperatureHigh isKindOfClass:[NSNull class]]) {
+        temperatureHigh = nil;
+    }
+    if ([apparentTemperatureLow isKindOfClass:[NSNull class]]) {
+        apparentTemperatureLow = nil;
+    }
+    if ([apparentTemperatureHigh isKindOfClass:[NSNull class]]) {
+        apparentTemperatureHigh = nil;
+    }
     
-    self = [self initWithTime:time summary:summary icon:icon precipProbability:precipProbability precipIntensity:precipIntensity temperature:temperature apparentTemperature:apparentTemperature humidity:humidity pressure:pressure windSpeed:windSpeed windBearing:windBearing uvIndex:uvIndex];
+    self = [self initWithTime:time summary:summary icon:icon precipProbability:precipProbability precipIntensity:precipIntensity temperature:temperature apparentTemperature:apparentTemperature humidity:humidity pressure:pressure windSpeed:windSpeed windBearing:windBearing uvIndex:uvIndex sunriseTime:_sunriseTime sunsetTime:_sunsetTime precipType:precipType temperatureLow:temperatureLow temperatureHigh:temperatureHigh apparentTemperatureLow:apparentTemperatureLow apparentTemperatureHigh:apparentTemperatureHigh];
     
     return self;
 }

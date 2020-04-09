@@ -26,6 +26,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSNumber *windBearing;
 @property (nonatomic, readonly) NSNumber *uvIndex;
 
+// refacotring
+@property (nonatomic, readonly) NSDate *sunriseTime;
+@property (nonatomic, readonly) NSDate *sunsetTime;
+@property (nonatomic, readonly, copy) NSString *precipType;
+@property (nonatomic, readonly) NSNumber *temperatureLow;
+@property (nonatomic, readonly) NSNumber *temperatureHigh;
+@property (nonatomic, readonly) NSNumber *apparentTemperatureLow;
+@property (nonatomic, readonly) NSNumber *apparentTemperatureHigh;
+
 - (instancetype)initWithTime:(NSDate *)time
                      summary:(NSString *)summary
                         icon:(NSString *)icon
@@ -37,7 +46,16 @@ NS_ASSUME_NONNULL_BEGIN
                     pressure:(NSNumber *)pressure
                    windSpeed:(NSNumber *)windSpeed
                  windBearing:(NSNumber *)windBearing
-                     uvIndex:(NSNumber *)uvIndex;
+                     uvIndex:(NSNumber *)uvIndex
+
+// refactoring
+                 sunriseTime:(NSDate *)sunriseTime
+                  sunsetTime:(NSDate *)sunsetTime
+                  precipType:(NSString *)precipType
+              temperatureLow:(NSNumber *)temperatureLow
+             temperatureHigh:(NSNumber *)temperatureHigh
+      apparentTemperatureLow:(NSNumber *)apparentTemperatureLow
+     apparentTemperatureHigh:(NSNumber *)apparentTemperatureHigh;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end
