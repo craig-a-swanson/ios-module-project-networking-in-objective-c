@@ -20,6 +20,7 @@
 }
 
 - (instancetype)initWithArray:(NSArray *)array {
+    // here we would need to get the "hourly" dictionary and then the "data" array
     NSArray *hourlyDictionaries = array;
     NSMutableArray<LSICurrentForecast *> *hourlies = [[NSMutableArray alloc] init];
     

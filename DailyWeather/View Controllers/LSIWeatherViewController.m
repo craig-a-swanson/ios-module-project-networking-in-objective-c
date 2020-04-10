@@ -13,6 +13,7 @@
 #import "LSIErrors.h"
 #import "LSILog.h"
 #import "LSICurrentForecast.h"
+#import "LSIWeatherForecast.h"
 
 @interface LSIWeatherViewController () {
     BOOL _requestedLocation;
@@ -130,26 +131,34 @@
 - (void)requestWeatherForLocation:(CLLocation *)location {
     
     // TODO: 1. Parse CurrentWeather.json from App Bundle and update UI
-    NSData *data = loadFile(@"CurrentWeather.json", [LSIWeatherViewController class]);
-    
-    NSError *error = nil;
-    NSDictionary *currentWeatherJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-    
-    if (error) {
-        NSLog(@"Error parsing json: %@", error);
-    }
-    LSICurrentForecast *currentWeather = [[LSICurrentForecast alloc] initWithDictionary:currentWeatherJson];
-    
-    self.currentForecast = currentWeather;
-    [self updateViews];
+//    NSData *data = loadFile(@"CurrentWeather.json", [LSIWeatherViewController class]);
+//
+//    NSError *error = nil;
+//    NSDictionary *currentWeatherJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+//
+//    if (error) {
+//        NSLog(@"Error parsing json: %@", error);
+//    }
+//    LSICurrentForecast *currentWeather = [[LSICurrentForecast alloc] initWithDictionary:currentWeatherJson];
+//
+//    self.currentForecast = currentWeather;
+//    [self updateViews];
     
     
     
     // TODO: 2. Refactor and Parse Weather.json from App Bundle and update UI
     NSData *weatherData = loadFile(@"Weather.json", [LSIWeatherViewController class]);
+    NSError *jsonError = nil;
+    NSDictionary *weatherJson = [NSJSONSerialization JSONObjectWithData:weatherData options:0 error:&jsonError];
+    if (jsonError) {
+        NSLog(@"JSON Parsing error retrieving weather.json:", jsonError);
+    }
     
-    NSError *weatherError = nil;
+    LSIWeatherForecast *currentWeather = [[LSIWeatherForecast alloc] initWithDictionary:weatherJson];
     
+    self.currentForecast = currentWeather.currently;
+    [self updateViews];
+    // weatherforecast initwithcurrently
     
 }
 
