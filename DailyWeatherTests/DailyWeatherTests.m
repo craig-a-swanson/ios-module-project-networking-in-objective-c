@@ -10,6 +10,7 @@
 #import "LSIFileHelper.h"
 #import "LSICurrentForecast.h"
 #import "LSIDailyForecast.h"
+#import "LSIWeatherForecast.h"
 
 @interface DailyWeatherTests : XCTestCase
 
@@ -70,6 +71,24 @@
     LSIDailyForecast *hourlyForecast = [[LSIDailyForecast alloc] initWithArray:json];
     LSICurrentForecast *hourOne = hourlyForecast.dailies[0];
     XCTAssertNil(hourOne.precipType);
+}
+
+- (void)testDailyWeatherParseWithWeatherJSON {
+    
+//    LSIWeatherForecast *weatherForecast = [[LSIWeatherForecast alloc] init];
+    
+    NSData *weatherData = loadFile(@"Weather.json", [DailyWeatherTests class]);
+    
+    NSError *jsonError = nil;
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:weatherData options:0 error:&jsonError];
+    if (jsonError) {
+        NSLog(@"JSON error parsing daily weather: %@", jsonError);
+    }
+    
+    LSIWeatherForecast *dailyForecast = [[LSIWeatherForecast alloc] initWithDailyDictionary:json];
+    XCTAssertEqual(8, dailyForecast.daily.dailies.count);
+    XCTAssertEqual(64.8, dailyForecast.daily.dailies[4].apparentTemperatureHigh.doubleValue);
+    
 }
 
 @end
