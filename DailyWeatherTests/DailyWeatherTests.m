@@ -11,6 +11,7 @@
 #import "LSICurrentForecast.h"
 #import "LSIDailyForecast.h"
 #import "LSIWeatherForecast.h"
+#import "LSIHourlyForecast.h"
 
 @interface DailyWeatherTests : XCTestCase
 
@@ -75,8 +76,6 @@
 
 - (void)testDailyWeatherParseWithWeatherJSON {
     
-//    LSIWeatherForecast *weatherForecast = [[LSIWeatherForecast alloc] init];
-    
     NSData *weatherData = loadFile(@"Weather.json", [DailyWeatherTests class]);
     
     NSError *jsonError = nil;
@@ -89,6 +88,22 @@
     XCTAssertEqual(8, dailyForecast.daily.dailies.count);
     XCTAssertEqual(64.8, dailyForecast.daily.dailies[4].apparentTemperatureHigh.doubleValue);
     
+}
+
+- (void)testHourlyWeatherParseWithWeatherJSON {
+    
+    NSData *weatherData = loadFile(@"Weather.json", [DailyWeatherTests class]);
+    
+    NSError *jsonError = nil;
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:weatherData options:0 error:&jsonError];
+    if (jsonError) {
+        NSLog(@"JSON error parsing hourly weather %@:", jsonError);
+    }
+    LSIWeatherForecast *hourlyForecast = [[LSIWeatherForecast alloc] initWithHourlyDictionary:json];
+    
+    XCTAssertEqual(49, hourlyForecast.hourly.hourlies.count);
+    NSLog(@"ICON: %@:", hourlyForecast.hourly.hourlies[48].icon);
+    XCTAssertTrue([hourlyForecast.hourly.hourlies[48].icon isEqualToString:@"partly-cloudy-night"]);
 }
 
 @end

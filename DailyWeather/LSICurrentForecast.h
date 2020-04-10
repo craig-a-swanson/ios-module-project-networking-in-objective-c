@@ -6,6 +6,13 @@
 //  Copyright © 2020 Lambda, Inc. All rights reserved.
 //
 
+/*
+ I put all of the available properties in the LSICurrentForecast object. That includes
+ all of the properties for Current Weather, Hourly Weather, and Daily Weather. The Hourly
+ and Daily Weather objects then use arrays of CurrentForecast as their foundations.
+ */
+
+
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -25,8 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSNumber *windSpeed;
 @property (nonatomic, readonly) NSNumber *windBearing;
 @property (nonatomic, readonly) NSNumber *uvIndex;
-
-// refacotring
 @property (nonatomic, readonly) NSDate *sunriseTime;
 @property (nonatomic, readonly) NSDate *sunsetTime;
 @property (nonatomic, readonly, copy) NSString *precipType;
@@ -47,8 +52,6 @@ NS_ASSUME_NONNULL_BEGIN
                    windSpeed:(NSNumber *)windSpeed
                  windBearing:(NSNumber *)windBearing
                      uvIndex:(NSNumber *)uvIndex
-
-// refactoring
                  sunriseTime:(NSDate *)sunriseTime
                   sunsetTime:(NSDate *)sunsetTime
                   precipType:(NSString *)precipType

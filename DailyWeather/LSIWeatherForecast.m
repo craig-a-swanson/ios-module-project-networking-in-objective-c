@@ -13,24 +13,6 @@
 
 @implementation LSIWeatherForecast
 
-//- (instancetype)initWithCurrently:(LSICurrentForecast *)currently {
-//    self = [super init];
-//    if (self) {
-//        _currently = currently;
-//    }
-//    return self;
-//}
-//- (instancetype)initWithDaily:(NSArray<LSICurrentForecast *> *)daily
-//                       hourly:(NSArray<LSICurrentForecast *> *)hourly {
-//    self = [super init];
-//    if (self) {
-////        _currently = [currently copy];
-//        _daily = [daily copy];
-//        _hourly = [hourly copy];
-//    }
-//    return self;
-//}
-
 - (instancetype)initWithCurrentDictionary:(NSDictionary *)dictionary {
     NSDictionary *currentDictionary = dictionary[@"currently"];
     
@@ -50,10 +32,14 @@
     return self;
 }
 
-
-//NSDictionary *hourlyWeather = dictionary[@"hourly"];
-//NSDictionary *dailyWeather = dictionary[@"daily"];
-//NSArray *hourlyDetails = hourlyWeather[@"data"];
-//NSArray *dailyDetails = dailyWeather[@"data"];
+- (instancetype)initWithHourlyDictionary:(NSDictionary *)dictionary {
+    NSDictionary *hourlyDictionary = dictionary[@"hourly"];
+    NSArray *hourlyArray = hourlyDictionary[@"data"];
+    
+    LSIHourlyForecast *hourlyWeatherForecast = [[LSIHourlyForecast alloc] initWithArray:hourlyArray];
+    
+    self.hourly = hourlyWeatherForecast;
+    return self;
+}
 
 @end

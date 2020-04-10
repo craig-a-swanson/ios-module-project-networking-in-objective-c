@@ -22,7 +22,6 @@
                    windSpeed:(NSNumber *)windSpeed
                  windBearing:(NSNumber *)windBearing
                      uvIndex:(NSNumber *)uvIndex
-// refactoring
                  sunriseTime:(NSDate *)sunriseTime
                   sunsetTime:(NSDate *)sunsetTime
                   precipType:(NSString *)precipType
@@ -43,7 +42,6 @@
         _windSpeed = windSpeed;
         _windBearing = windBearing;
         _uvIndex = uvIndex;
-// refactoring
         _sunriseTime = sunriseTime;
         _sunsetTime = sunsetTime;
         _precipType = precipType;
@@ -68,7 +66,6 @@
     NSNumber *windSpeed = dictionary[@"windSpeed"];
     NSNumber *windBearing = dictionary[@"windBearing"];
     NSNumber *uvIndex = dictionary[@"uvIndex"];
-// refactoring
     NSNumber *sunriseTimeNumber = dictionary[@"sunriseTime"];
     NSNumber *sunsetTimeNumber = dictionary[@"sunsetTime"];
     NSString *precipType = dictionary[@"precipType"];
@@ -76,6 +73,12 @@
     NSNumber *temperatureHigh = dictionary[@"temperatureHigh"];
     NSNumber *apparentTemperatureLow = dictionary[@"apparentTemperatureLow"];
     NSNumber *apparentTemperatureHigh = dictionary[@"apparentTemperatureHigh"];
+    
+    /*
+     I don't know if this was necessary or not, but since each property except "time"
+     is optional according to the documentation on the website, I specifically set
+     each one to nil if the JSON returns null.
+     */
     
     if (!timeNumber) {
         return nil;
@@ -115,7 +118,6 @@
     if ([uvIndex isKindOfClass:[NSNull class]]) {
         uvIndex = nil;
     }
-// refactoring
     if (!sunriseTimeNumber) {
         _sunriseTime = nil;
     } else {
