@@ -13,33 +13,43 @@
 
 @implementation LSIWeatherForecast
 
-- (instancetype)initWithCurrently:(LSICurrentForecast *)currently {
-    self = [super init];
-    if (self) {
-        _currently = currently;
-    }
-    return self;
-}
-- (instancetype)initWithDaily:(NSArray<LSICurrentForecast *> *)daily
-                       hourly:(NSArray<LSICurrentForecast *> *)hourly {
-    self = [super init];
-    if (self) {
-//        _currently = [currently copy];
-        _daily = [daily copy];
-        _hourly = [hourly copy];
-    }
-    return self;
-}
+//- (instancetype)initWithCurrently:(LSICurrentForecast *)currently {
+//    self = [super init];
+//    if (self) {
+//        _currently = currently;
+//    }
+//    return self;
+//}
+//- (instancetype)initWithDaily:(NSArray<LSICurrentForecast *> *)daily
+//                       hourly:(NSArray<LSICurrentForecast *> *)hourly {
+//    self = [super init];
+//    if (self) {
+////        _currently = [currently copy];
+//        _daily = [daily copy];
+//        _hourly = [hourly copy];
+//    }
+//    return self;
+//}
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
+- (instancetype)initWithCurrentDictionary:(NSDictionary *)dictionary {
     NSDictionary *currentDictionary = dictionary[@"currently"];
     
     LSICurrentForecast *currentWeather = [[LSICurrentForecast alloc] initWithDictionary:currentDictionary];
     
     self.currently = currentWeather;
     return self;
-    
 }
+
+- (instancetype)initWithDailyDictionary:(NSDictionary *)dictionary {
+    NSDictionary *dailyDictionary = dictionary[@"daily"];
+    NSArray *dailyArray = dailyDictionary[@"data"];
+    
+    LSIDailyForecast *dailyWeatherForecast = [[LSIDailyForecast alloc] initWithArray:dailyArray];
+    
+    self.daily = dailyWeatherForecast;
+    return self;
+}
+
 
 //NSDictionary *hourlyWeather = dictionary[@"hourly"];
 //NSDictionary *dailyWeather = dictionary[@"daily"];

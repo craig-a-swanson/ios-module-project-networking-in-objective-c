@@ -154,7 +154,7 @@
         NSLog(@"JSON Parsing error retrieving weather.json:", jsonError);
     }
     
-    LSIWeatherForecast *currentWeather = [[LSIWeatherForecast alloc] initWithDictionary:weatherJson];
+    LSIWeatherForecast *currentWeather = [[LSIWeatherForecast alloc] initWithCurrentDictionary:weatherJson];
     
     self.currentForecast = currentWeather.currently;
     [self updateViews];
