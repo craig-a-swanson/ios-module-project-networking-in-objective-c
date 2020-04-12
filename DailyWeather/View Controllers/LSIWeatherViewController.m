@@ -12,8 +12,8 @@
 #import "LSIFileHelper.h"
 #import "LSIErrors.h"
 #import "LSILog.h"
-#import "LSICurrentForecast.h"
-#import "LSIWeatherForecast.h"
+#import "LSICurrentWeather.h"
+#import "LSIWeatherForcast.h"
 
 @interface LSIWeatherViewController () {
     BOOL _requestedLocation;
@@ -23,7 +23,7 @@
 @property CLLocationManager *locationManager;
 @property CLLocation *location;
 @property (nonatomic) CLPlacemark *placemark;
-@property (nonatomic) LSICurrentForecast *currentForecast;
+@property (nonatomic) LSICurrentWeather *currentForecast;
 
 // MARK: - Outlets
 @property (strong, nonatomic) IBOutlet UIImageView *iconImage;
@@ -154,7 +154,7 @@
         NSLog(@"JSON Parsing error retrieving weather.json:", jsonError);
     }
     
-    LSIWeatherForecast *currentWeather = [[LSIWeatherForecast alloc] initWithCurrentDictionary:weatherJson];
+    LSIWeatherForcast *currentWeather = [[LSIWeatherForcast alloc] initWithCurrentDictionary:weatherJson];
     
     self.currentForecast = currentWeather.currently;
     [self updateViews];

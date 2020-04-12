@@ -12,6 +12,9 @@
 #import "LSIDailyForecast.h"
 #import "LSIWeatherForecast.h"
 #import "LSIHourlyForecast.h"
+#import "LSIDailyForcast.h"
+#import "LSIWeatherForcast.h"
+#import "LSIHourlyForcast.h"
 
 @interface DailyWeatherTests : XCTestCase
 
@@ -84,10 +87,13 @@
         NSLog(@"JSON error parsing daily weather: %@", jsonError);
     }
     
-    LSIWeatherForecast *dailyForecast = [[LSIWeatherForecast alloc] initWithDailyDictionary:json];
+//    LSIWeatherForecast *dailyForecast = [[LSIWeatherForecast alloc] initWithDailyDictionary:json];
+//    XCTAssertEqual(8, dailyForecast.daily.dailies.count);
+//    XCTAssertEqual(64.8, dailyForecast.daily.dailies[4].apparentTemperatureHigh.doubleValue);
+    
+    LSIWeatherForcast *dailyForecast = [[LSIWeatherForcast alloc] initWithDailyDictionary:json];
     XCTAssertEqual(8, dailyForecast.daily.dailies.count);
     XCTAssertEqual(64.8, dailyForecast.daily.dailies[4].apparentTemperatureHigh.doubleValue);
-    
 }
 
 - (void)testHourlyWeatherParseWithWeatherJSON {
@@ -99,11 +105,17 @@
     if (jsonError) {
         NSLog(@"JSON error parsing hourly weather %@:", jsonError);
     }
-    LSIWeatherForecast *hourlyForecast = [[LSIWeatherForecast alloc] initWithHourlyDictionary:json];
+//    LSIWeatherForecast *hourlyForecast = [[LSIWeatherForecast alloc] initWithHourlyDictionary:json];
+//
+//    XCTAssertEqual(49, hourlyForecast.hourly.hourlies.count);
+//    NSLog(@"ICON: %@:", hourlyForecast.hourly.hourlies[48].icon);
+//    XCTAssertTrue([hourlyForecast.hourly.hourlies[48].icon isEqualToString:@"partly-cloudy-night"]);
     
-    XCTAssertEqual(49, hourlyForecast.hourly.hourlies.count);
-    NSLog(@"ICON: %@:", hourlyForecast.hourly.hourlies[48].icon);
-    XCTAssertTrue([hourlyForecast.hourly.hourlies[48].icon isEqualToString:@"partly-cloudy-night"]);
+    LSIWeatherForcast *hourlyForcast = [[LSIWeatherForcast alloc] initWithHourlyDictionary:json];
+    
+    XCTAssertEqual(49, hourlyForcast.hourly.hourlies.count);
+    XCTAssertTrue([hourlyForcast.hourly.hourlies[48].icon isEqualToString:@"partly-cloudy-night"]);
+    
 }
 
 @end
