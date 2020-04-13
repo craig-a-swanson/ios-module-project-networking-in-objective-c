@@ -8,16 +8,35 @@
 #import <CoreLocation/CoreLocation.h>
 #import "LSIWeatherViewController.h"
 #import "LSIWeatherIcons.h"
+#import "LSICardinalDirection.h"
+#import "LSIFileHelper.h"
 #import "LSIErrors.h"
 #import "LSILog.h"
+#import "LSICurrentWeather.h"
+#import "LSIWeatherForcast.h"
 
 @interface LSIWeatherViewController () {
     BOOL _requestedLocation;
 }
 
+// MARK: - Properties
 @property CLLocationManager *locationManager;
 @property CLLocation *location;
 @property (nonatomic) CLPlacemark *placemark;
+@property (nonatomic) LSICurrentWeather *currentForecast;
+
+// MARK: - Outlets
+@property (strong, nonatomic) IBOutlet UIImageView *iconImage;
+@property (strong, nonatomic) IBOutlet UILabel *cityStateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *summaryLabel;
+@property (strong, nonatomic) IBOutlet UILabel *temperatureLabel;
+@property (strong, nonatomic) IBOutlet UILabel *windSpeedLabel;
+@property (strong, nonatomic) IBOutlet UILabel *apparentTempLabel;
+@property (strong, nonatomic) IBOutlet UILabel *humidityLabel;
+@property (strong, nonatomic) IBOutlet UILabel *pressureLabel;
+@property (strong, nonatomic) IBOutlet UILabel *precipProbabilityLabel;
+@property (strong, nonatomic) IBOutlet UILabel *uvIndexLabel;
+
 
 @end
 
@@ -30,8 +49,6 @@
 
 
 @implementation LSIWeatherViewController
-
-
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
@@ -49,16 +66,13 @@
     return self;
 }
 
-
+// MARK: - View Controller Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
-    
-    // TODO: Transparent toolbar with info button (Settings)
-    // TODO: Handle settings button pressed
 }
 
 //https://developer.apple.com/documentation/corelocation/converting_between_coordinates_and_user-friendly_place_names
@@ -114,19 +128,64 @@
 - (void)requestWeatherForLocation:(CLLocation *)location {
     
     // TODO: 1. Parse CurrentWeather.json from App Bundle and update UI
-    
+//    NSData *data = loadFile(@"CurrentWeather.json", [LSIWeatherViewController class]);
+//
+//    NSError *error = nil;
+//    NSDictionary *currentWeatherJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+//
+//    if (error) {
+//        NSLog(@"Error parsing json: %@", error);
+//    }
+//    LSICurrentForecast *currentWeather = [[LSICurrentForecast alloc] initWithDictionary:currentWeatherJson];
+//
+//    self.currentForecast = currentWeather;
+//    [self updateViews];
     
     
     
     // TODO: 2. Refactor and Parse Weather.json from App Bundle and update UI
+    NSData *weatherData = loadFile(@"Weather.json", [LSIWeatherViewController class]);
+    NSError *jsonError = nil;
+    NSDictionary *weatherJson = [NSJSONSerialization JSONObjectWithData:weatherData options:0 error:&jsonError];
+    if (jsonError) {
+        NSLog(@"JSON Parsing error retrieving weather.json:", jsonError);
+    }
+    
+    LSIWeatherForcast *currentWeather = [[LSIWeatherForcast alloc] initWithCurrentDictionary:weatherJson];
+    
+    self.currentForecast = currentWeather.currently;
+    [self updateViews];
+    
 }
 
 - (void)updateViews {
     if (self.placemark) {
         // TODO: Update the City, State label
+        NSString *city = _placemark.locality;
+        NSString *state = _placemark.administrativeArea;
+        NSString *cityState = [NSString stringWithFormat:@"%@, %@", city, state];
+        _cityStateLabel.text = cityState;
     }
-    
     // TODO: Update the UI based on the current forecast
+    // Top View
+    _iconImage.image = [LSIWeatherIcons weatherImageForIconName:_currentForecast.icon];
+    _summaryLabel.text = _currentForecast.summary;
+    _temperatureLabel.text = [NSString stringWithFormat:@"%d℉", _currentForecast.temperature.intValue];
+    
+    // Bottom View
+    NSString *bearing = [LSICardinalDirection directionForHeading:_currentForecast.windBearing.doubleValue];
+    NSString *windData = [NSString stringWithFormat:@"%@ %dmph", bearing, _currentForecast.windSpeed.intValue];
+    _windSpeedLabel.text = windData;
+    _apparentTempLabel.text = [NSString stringWithFormat:@"%d℉", _currentForecast.apparentTemperature.intValue];
+    double humidityDouble = (_currentForecast.humidity.doubleValue * 100.0);
+    _humidityLabel.text = [NSString stringWithFormat:@"%0.0f%%", humidityDouble];
+    double inchesMercury = (_currentForecast.pressure.doubleValue * 0.029529980);
+    _pressureLabel.text = [NSString stringWithFormat:@"%0.2f inHG", inchesMercury];
+    double precipChanceDouble = (_currentForecast.precipProbability.doubleValue * 100.0);
+    _precipProbabilityLabel.text = [NSString stringWithFormat:@"%0.0f%%", precipChanceDouble];
+    _uvIndexLabel.text = [NSString stringWithFormat:@"%@", _currentForecast.uvIndex];
+    
+    
 }
 
 @end
