@@ -73,9 +73,6 @@
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
-    
-    // TODO: Transparent toolbar with info button (Settings)
-    // TODO: Handle settings button pressed
 }
 
 //https://developer.apple.com/documentation/corelocation/converting_between_coordinates_and_user-friendly_place_names
@@ -158,7 +155,6 @@
     
     self.currentForecast = currentWeather.currently;
     [self updateViews];
-    // weatherforecast initwithcurrently
     
 }
 

@@ -8,10 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "LSIFileHelper.h"
-#import "LSICurrentForecast.h"
-#import "LSIDailyForecast.h"
-#import "LSIWeatherForecast.h"
-#import "LSIHourlyForecast.h"
+#import "LSICurrentWeather.h"
 #import "LSIDailyForcast.h"
 #import "LSIWeatherForcast.h"
 #import "LSIHourlyForcast.h"
@@ -32,15 +29,12 @@
         NSLog(@"JSON Parsing error: %@:", jsonError);
     }
     
-    LSIDailyForecast *dailyForecast = [[LSIDailyForecast alloc] initWithArray:json];
+    LSIDailyForcast *dailyForecast = [[LSIDailyForcast alloc] initWithArray:json];
     XCTAssertNotNil(dailyForecast);
     XCTAssertEqual(8, dailyForecast.dailies.count);
     
-    LSICurrentForecast *dayTwo = dailyForecast.dailies[1];
+    LSIDailyForcast *dayTwo = dailyForecast.dailies[1];
     XCTAssertEqual(4.44, dayTwo.windSpeed.doubleValue);
-
-    
-    // TODO: Create Unit Tests for each separate JSON file
 
 }
 
@@ -54,12 +48,10 @@
         NSLog(@"JSON Parsing error: %@:", jsonError);
     }
     
-    LSIDailyForecast *hourlyForecast = [[LSIDailyForecast alloc] initWithArray:json];
+    LSIHourlyForcast *hourlyForecast = [[LSIHourlyForcast alloc] initWithArray:json];
     XCTAssertNotNil(hourlyForecast);
-    XCTAssertEqual(49, hourlyForecast.dailies.count);
-    
-    LSICurrentForecast *hourFour = hourlyForecast.dailies[3];
-    XCTAssertEqual(2.86, hourFour.windSpeed.doubleValue);
+    XCTAssertEqual(49, hourlyForecast.hourlies.count);
+    XCTAssertEqual(2.86, hourlyForecast.hourlies[3].windSpeed.doubleValue);
 }
 
 - (void)testHourlyPrecipTypeIsNull {
@@ -72,9 +64,8 @@
         NSLog(@"JSON Parsing error: %@:", jsonError);
     }
     
-    LSIDailyForecast *hourlyForecast = [[LSIDailyForecast alloc] initWithArray:json];
-    LSICurrentForecast *hourOne = hourlyForecast.dailies[0];
-    XCTAssertNil(hourOne.precipType);
+    LSIHourlyForcast *hourlyForecast = [[LSIHourlyForcast alloc] initWithArray:json];
+    XCTAssertNil(hourlyForecast.hourlies[0].precipType);
 }
 
 - (void)testDailyWeatherParseWithWeatherJSON {
@@ -86,10 +77,6 @@
     if (jsonError) {
         NSLog(@"JSON error parsing daily weather: %@", jsonError);
     }
-    
-//    LSIWeatherForecast *dailyForecast = [[LSIWeatherForecast alloc] initWithDailyDictionary:json];
-//    XCTAssertEqual(8, dailyForecast.daily.dailies.count);
-//    XCTAssertEqual(64.8, dailyForecast.daily.dailies[4].apparentTemperatureHigh.doubleValue);
     
     LSIWeatherForcast *dailyForecast = [[LSIWeatherForcast alloc] initWithDailyDictionary:json];
     XCTAssertEqual(8, dailyForecast.daily.dailies.count);
@@ -105,11 +92,6 @@
     if (jsonError) {
         NSLog(@"JSON error parsing hourly weather %@:", jsonError);
     }
-//    LSIWeatherForecast *hourlyForecast = [[LSIWeatherForecast alloc] initWithHourlyDictionary:json];
-//
-//    XCTAssertEqual(49, hourlyForecast.hourly.hourlies.count);
-//    NSLog(@"ICON: %@:", hourlyForecast.hourly.hourlies[48].icon);
-//    XCTAssertTrue([hourlyForecast.hourly.hourlies[48].icon isEqualToString:@"partly-cloudy-night"]);
     
     LSIWeatherForcast *hourlyForcast = [[LSIWeatherForcast alloc] initWithHourlyDictionary:json];
     
