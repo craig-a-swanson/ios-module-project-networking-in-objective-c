@@ -49,8 +49,8 @@
     
     LSIDailyForcast *dailyWeatherForecast = [[LSIDailyForcast alloc] initWithArray:dailyArray];
     
-    self = [self initWithDailies:dailyWeatherForecast];
-    return self;
+//    self = [self initWithDailies:dailyWeatherForecast];
+    return dailyWeatherForecast;
 }
 
 - (instancetype)initWithHourlyDictionary:(NSDictionary *)dictionary {
@@ -60,6 +60,15 @@
     LSIHourlyForcast *hourlyWeatherForcast = [[LSIHourlyForcast alloc] initWithArray:hourlyArray];
     
     self = [self initWithHourlies:hourlyWeatherForcast];
+    return self;
+}
+
+- (instancetype)initWithCompleteForecast:(LSICurrentWeather *)currently daily:(LSIDailyForcast *)daily hourly:(LSIHourlyForcast *)hourly {
+    if (self = [self init]) {
+        _currently = currently;
+        _hourly = hourly;
+        _daily = daily;
+    }
     return self;
 }
 

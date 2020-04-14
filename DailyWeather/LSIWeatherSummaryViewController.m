@@ -16,7 +16,6 @@
 #import "LSICurrentWeather.h"
 #import "LSIWeatherForcast.h"
 #import "LSICurrentWeatherChildViewController.h"
-#import "LSIDailyWeatherTableViewController.h"
 #import "LSIDailyWeatherTableViewCell.h"
 
 @interface LSIWeatherSummaryViewController () {

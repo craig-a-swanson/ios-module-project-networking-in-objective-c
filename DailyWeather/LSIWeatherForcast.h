@@ -21,9 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LSIWeatherForcast : NSObject
 
 // Properties
-@property (nonatomic, readonly) LSICurrentWeather *currently;
-@property (nonatomic, readonly) LSIDailyForcast *daily;
-@property (nonatomic, readonly) LSIHourlyForcast *hourly;
+@property (nonatomic) LSICurrentWeather *currently;
+@property (nonatomic) LSIDailyForcast *daily;
+@property (nonatomic) LSIHourlyForcast *hourly;
 
 - (instancetype)initWithCurrents:(LSICurrentWeather *)currently;
 - (instancetype)initWithDailies:(LSIDailyForcast *)daily;
@@ -32,6 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithCurrentDictionary:(NSDictionary *)dictionary;
 - (instancetype)initWithDailyDictionary:(NSDictionary *)dictionary;
 - (instancetype)initWithHourlyDictionary:(NSDictionary *)dictionary;
+
+- (instancetype)initWithCompleteForecast:(LSICurrentWeather *)currently
+                                   daily:(LSIDailyForcast *)daily
+                                  hourly:(LSIHourlyForcast *)hourly;
 
 @end
 
