@@ -26,6 +26,7 @@
 @property CLLocation *location;
 @property (nonatomic) CLPlacemark *placemark;
 @property (nonatomic) LSICurrentWeather *currentForecast;
+@property LSICurrentWeatherChildViewController *currentWeatherVC;
 
 // MARK: - Outlets
 @property (strong, nonatomic) IBOutlet UITableView *dailyTableView;
@@ -109,7 +110,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.location = location;
                 self.placemark = place;
-//                [self updateViews];
+                self.currentWeatherVC.placemark = self.placemark;
             });
             requestedLocation = NO;
         }];
@@ -128,11 +129,12 @@
     LSIWeatherForcast *currentWeather = [[LSIWeatherForcast alloc] initWithCurrentDictionary:weatherJson];
     
     self.currentForecast = currentWeather.currently;
-//    [self updateViews];
+    self.currentWeatherVC.currentForecast = self.currentForecast;
     
 }
 
-//- (void)updateViews {
+- (void)updateViews {
+    
 //    if (self.placemark) {
 //        // TODO: Update the City, State label
 //        NSString *city = _placemark.locality;
@@ -145,7 +147,7 @@
 //    _iconImage.image = [LSIWeatherIcons weatherImageForIconName:_currentForecast.icon];
 //    _summaryLabel.text = _currentForecast.summary;
 //    _temperatureLabel.text = [NSString stringWithFormat:@"%d℉", _currentForecast.temperature.intValue];
-//}
+}
 
 // MARK: - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -163,10 +165,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier  isEqual: @"CurrentWeatherSegue"]) {
-        LSICurrentWeatherChildViewController *currentWeatherVC = segue.destinationViewController;
+        LSICurrentWeatherChildViewController *destinationVC = segue.destinationViewController;
         
-        currentWeatherVC.currentForecast = self.currentForecast;
-        currentWeatherVC.placemark = self.placemark;
+        self.currentWeatherVC = destinationVC;
+        
     }
 }
 

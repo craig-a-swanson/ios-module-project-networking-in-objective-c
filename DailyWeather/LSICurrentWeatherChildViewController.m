@@ -24,12 +24,17 @@
 
 @implementation LSICurrentWeatherChildViewController
 
-//@synthesize currentForecast = _currentForecast;
-//@synthesize placemark = _placemark;
+@synthesize currentForecast = _currentForecast;
+@synthesize placemark = _placemark;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self updateViews];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self updateViews];
 }
 
