@@ -23,7 +23,7 @@
                                     <constraint firstAttribute="height" constant="300" id="JxK-DJ-TkG"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="d5h-At-Esc" kind="embed" id="Chx-g7-aBY"/>
+                                    <segue destination="d5h-At-Esc" kind="embed" identifier="CurrentWeatherSegue" id="Chx-g7-aBY"/>
                                 </connections>
                             </containerView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1Ob-Cc-Q5u">
@@ -445,6 +445,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5De-FW-H6w"/>
                     </view>
+                    <connections>
+                        <outlet property="cityStateLabel" destination="Ffc-wp-r8x" id="uat-vT-BwJ"/>
+                        <outlet property="iconImage" destination="J2H-05-vgX" id="z3t-zT-4SK"/>
+                        <outlet property="summaryLabel" destination="3gX-v3-XUh" id="qg4-zZ-cp0"/>
+                        <outlet property="temperatureLabel" destination="CBp-r3-rku" id="Pmk-3T-3Kb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BRP-h1-m9I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

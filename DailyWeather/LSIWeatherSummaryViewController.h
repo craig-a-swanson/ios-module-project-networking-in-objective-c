@@ -8,10 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
+typedef void (^LSILocationHandler)(CLPlacemark *placemark, NSError *error);
 
 @interface LSIWeatherSummaryViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
+//- (void)requestCurrentLocationWithCompletion:(LSILocationHandler)completionHandler;
+- (void)requestCurrentPlacemarkForLocation:(CLLocation *)location
+                            withCompletion:(void (^)(CLPlacemark *, NSError *))completionHandler;
+
+
+- (void)requestWeatherForLocation:(CLLocation *)location;
+
+
 @end
 
-NS_ASSUME_NONNULL_END
