@@ -8,6 +8,17 @@
 
 #import "LSIDailyWeatherTableViewCell.h"
 
+@interface LSIDailyWeatherTableViewCell ()
+
+// MARK: - Outlets
+
+@property (strong, nonatomic) IBOutlet UILabel *dayOfWeekLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *icon;
+@property (strong, nonatomic) IBOutlet UILabel *highTempLabel;
+@property (strong, nonatomic) IBOutlet UILabel *lowTempLabel;
+
+@end
+
 @implementation LSIDailyWeatherTableViewCell
 
 - (void)awakeFromNib {

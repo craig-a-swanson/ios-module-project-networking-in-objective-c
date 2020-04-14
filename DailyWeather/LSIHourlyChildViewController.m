@@ -37,7 +37,7 @@
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 1;
+    return 8;
 }
 
 //- (void)encodeWithCoder:(nonnull NSCoder *)coder {

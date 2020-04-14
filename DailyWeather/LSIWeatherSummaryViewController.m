@@ -16,6 +16,8 @@
 #import "LSICurrentWeather.h"
 #import "LSIWeatherForcast.h"
 #import "LSICurrentWeatherChildViewController.h"
+#import "LSIDailyWeatherTableViewController.h"
+#import "LSIDailyWeatherTableViewCell.h"
 
 @interface LSIWeatherSummaryViewController () {
     BOOL _requestedLocation;
@@ -151,12 +153,12 @@
 
 // MARK: - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 9;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DailyCell" forIndexPath:indexPath];
+    LSIDailyWeatherTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DailyCell" forIndexPath:indexPath];
     
     return cell;
 }
