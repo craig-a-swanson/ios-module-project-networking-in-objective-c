@@ -17,6 +17,9 @@
 #import "LSIWeatherForcast.h"
 #import "LSICurrentWeatherChildViewController.h"
 #import "LSIDailyWeatherTableViewCell.h"
+#import "WeatherFetcher.h"
+#import "LSIDailyForcast.h"
+#import "LSIHourlyForcast.h"
 
 @interface LSIWeatherSummaryViewController () {
     BOOL _requestedLocation;
@@ -28,6 +31,7 @@
 @property (nonatomic) CLPlacemark *placemark;
 @property (nonatomic) LSICurrentWeather *currentForecast;
 @property LSICurrentWeatherChildViewController *currentWeatherVC;
+@property (nonatomic) WeatherFetcher *weatherFetcher;
 
 // MARK: - Outlets
 @property (strong, nonatomic) IBOutlet UITableView *dailyTableView;
@@ -66,6 +70,19 @@
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
+    
+    // Testing fetcher
+    self.weatherFetcher = [[WeatherFetcher alloc] init];
+    [self.weatherFetcher fetchTodaysWeather:^(LSIWeatherForcast * _Nullable weatherForcast, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error fetching today's weather: %@", error);
+            return;
+        }
+        
+        NSLog(@"Current Weather Apparent Temp: %@", weatherForcast.currently.apparentTemperature);
+        NSLog(@"Daily Weather Count: %d", weatherForcast.daily.dailies.count);
+        NSLog(@"Hourly Weather Count: %d", weatherForcast.hourly.hourlies.count);
+    }];
 }
 
 //https://developer.apple.com/documentation/corelocation/converting_between_coordinates_and_user-friendly_place_names

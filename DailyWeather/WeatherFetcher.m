@@ -45,10 +45,7 @@ static NSString *baseURLString = @"https://api.darksky.net/forecast/8442b4704392
         LSIWeatherForcast *currentWeather = [[LSIWeatherForcast alloc] initWithCurrentDictionary:jsonData];
         LSIWeatherForcast *hourlyWeather = [[LSIWeatherForcast alloc] initWithHourlyDictionary:jsonData];
         LSIWeatherForcast *dailyWeather = [[LSIWeatherForcast alloc] initWithDailyDictionary:jsonData];
-//        
-//        _completeForecast.currently = currentWeather;
-//        _completeForecast.hourly = hourlyWeather;
-//        _completeForecast.daily = dailyWeather;
+
         LSIWeatherForcast *completeForecast = [[LSIWeatherForcast alloc] initWithCompleteForecast:currentWeather.currently daily:dailyWeather.daily hourly:hourlyWeather.hourly];
         
         completion(completeForecast, nil);
