@@ -39,6 +39,7 @@
 
 // MARK: - Outlets
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @end
 
@@ -50,6 +51,10 @@
 @end
 
 @implementation LSIWeatherSummaryViewController
+
+- (IBAction)prepareForUnwind:(UIStoryboardSegue *)unwindSegue {
+    
+}
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
@@ -75,7 +80,8 @@
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
     
-
+    [self.toolbar setBackgroundImage:[UIImage new] forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    [self.toolbar setShadowImage:[UIImage new] forToolbarPosition:UIBarPositionAny];
 
 }
 
