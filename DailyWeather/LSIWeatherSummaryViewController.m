@@ -43,15 +43,13 @@
 
 @end
 
-// NOTE: You must declare the Category before the main implementation,
-// otherwise you'll see errors about the type not being correct if you
-// try to move delegate methods out of the main implementation body
 @interface LSIWeatherSummaryViewController (CLLocationManagerDelegate) <CLLocationManagerDelegate>
 
 @end
 
 @implementation LSIWeatherSummaryViewController
 
+// The unwind segue allows the "Done" button tap in the DarkSky disclosure table view to return to the main view controller.
 - (IBAction)prepareForUnwind:(UIStoryboardSegue *)unwindSegue {
     
 }
@@ -80,12 +78,13 @@
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
     
+    // The following two lines create a transparent toolbar.
     [self.toolbar setBackgroundImage:[UIImage new] forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     [self.toolbar setShadowImage:[UIImage new] forToolbarPosition:UIBarPositionAny];
 
 }
 
-//https://developer.apple.com/documentation/corelocation/converting_between_coordinates_and_user-friendly_place_names
+// MARK: - Methods
 - (void)requestCurrentPlacemarkForLocation:(CLLocation *)location
                             withCompletion:(void (^)(CLPlacemark *, NSError *))completionHandler {
     if (location) {
@@ -137,7 +136,7 @@
 
 - (void)requestWeatherForLocation:(CLLocation *)location {
     
-    // Getting weather data with fetcher
+    // Getting weather data with fetcher. The data that is returned is then used to set the currentForecast, hourlyForecast, and dailyForecast variables to their respective objects. Current and hourly forecasts are passed to their respective view controllers.
     self.weatherFetcher = [[WeatherFetcher alloc] init];
     [self.weatherFetcher fetchTodaysWeather:^(LSIWeatherForcast * _Nullable weatherForcast, NSError * _Nullable error) {
         if (error) {
@@ -154,29 +153,8 @@
             self.hourlyCollectionVC.hourlyForecast = self.hourlyForecast;
             
             [self.tableView reloadData];
-            
-            NSLog(@"Current Weather Apparent Temp: %@", weatherForcast.currently.apparentTemperature);
-            NSLog(@"Daily Weather Count: %d", self.dailyForecast.dailies.count);
-            NSLog(@"Hourly Weather Count: %d", self.hourlyForecast.hourlies.count);
-            
         });
     }];
-}
-
-- (void)updateViews {
-    
-//    if (self.placemark) {
-//        // TODO: Update the City, State label
-//        NSString *city = _placemark.locality;
-//        NSString *state = _placemark.administrativeArea;
-//        NSString *cityState = [NSString stringWithFormat:@"%@, %@", city, state];
-//        _cityStateLabel.text = cityState;
-//    }
-//    // TODO: Update the UI based on the current forecast
-//    // Top View
-//    _iconImage.image = [LSIWeatherIcons weatherImageForIconName:_currentForecast.icon];
-//    _summaryLabel.text = _currentForecast.summary;
-//    _temperatureLabel.text = [NSString stringWithFormat:@"%d℉", _currentForecast.temperature.intValue];
 }
 
 // MARK: - UITableViewDataSource

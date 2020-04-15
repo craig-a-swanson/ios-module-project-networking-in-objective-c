@@ -42,6 +42,8 @@ static NSString *baseURLString = @"https://api.darksky.net/forecast/8442b4704392
             return;
         }
         
+        // The json data returned from the data task is used in three separate method calls, one call for each object (current, hourly, daily)
+        // A separate initializer is then called to combine the three objects into one LSIWeatherForecast object that is returned to the caller.
         LSIWeatherForcast *currentWeather = [[LSIWeatherForcast alloc] initWithCurrentDictionary:jsonData];
         LSIWeatherForcast *hourlyWeather = [[LSIWeatherForcast alloc] initWithHourlyDictionary:jsonData];
         LSIWeatherForcast *dailyWeather = [[LSIWeatherForcast alloc] initWithDailyDictionary:jsonData];
