@@ -16,6 +16,7 @@
 #import "LSICurrentWeather.h"
 #import "LSIWeatherForcast.h"
 #import "LSICurrentWeatherChildViewController.h"
+#import "LSIHourlyChildViewController.h"
 #import "LSIDailyWeatherTableViewCell.h"
 #import "WeatherFetcher.h"
 #import "LSIDailyForcast.h"
@@ -33,6 +34,7 @@
 @property (nonatomic) LSIHourlyForcast *hourlyForecast;
 @property (nonatomic) LSIDailyForcast *dailyForecast;
 @property LSICurrentWeatherChildViewController *currentWeatherVC;
+@property LSIHourlyChildViewController *hourlyCollectionVC;
 @property (nonatomic) WeatherFetcher *weatherFetcher;
 
 // MARK: - Outlets
@@ -143,6 +145,8 @@
             self.dailyForecast = weatherForcast.daily;
             
             self.currentWeatherVC.currentForecast = self.currentForecast;
+            self.hourlyCollectionVC.hourlyForecast = self.hourlyForecast;
+            
             [self.tableView reloadData];
             
             NSLog(@"Current Weather Apparent Temp: %@", weatherForcast.currently.apparentTemperature);
@@ -193,6 +197,10 @@
         
         self.currentWeatherVC = destinationVC;
         
+    } else if ([segue.identifier isEqual:@"HourlyWeatherSegue"]) {
+        LSIHourlyChildViewController *destinationVC = segue.destinationViewController;
+        
+        self.hourlyCollectionVC = destinationVC;
     }
 }
 

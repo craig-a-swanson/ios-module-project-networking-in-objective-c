@@ -7,16 +7,28 @@
 //
 
 #import "LSIHourlyChildViewController.h"
+#import "HourlyWeatherCollectionViewCell.h"
+#import "LSIHourlyForcast.h"
 
 @interface LSIHourlyChildViewController ()
+
+// MARK: - Outlets
+@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
 @implementation LSIHourlyChildViewController
 
+@synthesize hourlyForecast = _hourlyForecast;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (void)setHourlyForecast:(LSIHourlyForcast *)hourlyForecast {
+    _hourlyForecast = hourlyForecast;
+    [self.collectionView reloadData];
 }
 
 /*
@@ -31,13 +43,17 @@
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HourlyCell" forIndexPath:indexPath];
+    HourlyWeatherCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HourlyCell" forIndexPath:indexPath];
+    
+    LSIHourlyForcast *hourlyWeather = [self.hourlyForecast.hourlies objectAtIndex:indexPath.row];
+    
+    cell.hourlyForecast = hourlyWeather;
     
     return cell;
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 8;
+    return _hourlyForecast.hourlies.count;
 }
 
 //- (void)encodeWithCoder:(nonnull NSCoder *)coder {

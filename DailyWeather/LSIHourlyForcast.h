@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSNumber *precipIntensity;
 @property (nonatomic, readonly, copy) NSString *precipType;
 @property (nonatomic, readonly) NSNumber *temperatureLow;
-@property (nonatomic, readonly) NSNumber *temperatureHigh;
+@property (nonatomic, readonly) NSNumber *temperature;
 @property (nonatomic, readonly) NSNumber *apparentTemperatureLow;
 @property (nonatomic, readonly) NSNumber *apparentTemperatureHigh;
 @property (nonatomic, readonly) NSNumber *humidity;
@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
              precipIntensity:(NSNumber *)precipIntensity
                   precipType:(NSString *)precipType
               temperatureLow:(NSNumber *)temperatureLow
-             temperatureHigh:(NSNumber *)temperatureHigh
+             temperature:(NSNumber *)temperature
       apparentTemperatureLow:(NSNumber *)apparentTemperatureLow
      apparentTemperatureHigh:(NSNumber *)apparentTemperatureHigh
                     humidity:(NSNumber *)humidity

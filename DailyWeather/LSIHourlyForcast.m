@@ -17,7 +17,7 @@
              precipIntensity:(NSNumber *)precipIntensity
                   precipType:(NSString *)precipType
               temperatureLow:(NSNumber *)temperatureLow
-             temperatureHigh:(NSNumber *)temperatureHigh
+             temperature:(NSNumber *)temperature
       apparentTemperatureLow:(NSNumber *)apparentTemperatureLow
      apparentTemperatureHigh:(NSNumber *)apparentTemperatureHigh
                     humidity:(NSNumber *)humidity
@@ -33,7 +33,7 @@
         _precipIntensity = precipIntensity;
         _precipType = precipType;
         _temperatureLow = temperatureLow;
-        _temperatureHigh = temperatureHigh;
+        _temperature = temperature;
         _apparentTemperatureLow = apparentTemperatureLow;
         _apparentTemperatureHigh = apparentTemperatureHigh;
         _humidity = humidity;
@@ -64,7 +64,7 @@
         NSNumber *precipIntensity = dictionary[@"precipIntensity"];
         NSString *precipType = dictionary[@"precipType"];
         NSNumber *temperatureLow = dictionary[@"temperatureLow"];
-        NSNumber *temperatureHigh = dictionary[@"temperatureHigh"];
+        NSNumber *temperature = dictionary[@"temperature"];
         NSNumber *apparentTemperatureLow = dictionary[@"apparentTemperatureLow"];
         NSNumber *apparentTemperatureHigh = dictionary[@"apparentTemperatureHigh"];
         NSNumber *humidity = dictionary[@"humidity"];
@@ -111,8 +111,8 @@
         if ([temperatureLow isKindOfClass:[NSNull class]]) {
             temperatureLow = nil;
         }
-        if ([temperatureHigh isKindOfClass:[NSNull class]]) {
-            temperatureHigh = nil;
+        if ([temperature isKindOfClass:[NSNull class]]) {
+            temperature = nil;
         }
         if ([apparentTemperatureLow isKindOfClass:[NSNull class]]) {
             apparentTemperatureLow = nil;
@@ -120,7 +120,7 @@
         if ([apparentTemperatureHigh isKindOfClass:[NSNull class]]) {
             apparentTemperatureHigh = nil;
         }
-        LSIHourlyForcast *newHourlyForcast = [[LSIHourlyForcast alloc] initWithTime:time summary:summary icon:icon precipProbability:precipProbability precipIntensity:precipIntensity precipType:precipType temperatureLow:temperatureLow temperatureHigh:temperatureHigh apparentTemperatureLow:apparentTemperatureLow apparentTemperatureHigh:apparentTemperatureHigh humidity:humidity pressure:pressure windSpeed:windSpeed windBearing:windBearing uvIndex:uvIndex];
+        LSIHourlyForcast *newHourlyForcast = [[LSIHourlyForcast alloc] initWithTime:time summary:summary icon:icon precipProbability:precipProbability precipIntensity:precipIntensity precipType:precipType temperatureLow:temperatureLow temperature:temperature apparentTemperatureLow:apparentTemperatureLow apparentTemperatureHigh:apparentTemperatureHigh humidity:humidity pressure:pressure windSpeed:windSpeed windBearing:windBearing uvIndex:uvIndex];
         
         [hourliesArray addObject:newHourlyForcast];
     }

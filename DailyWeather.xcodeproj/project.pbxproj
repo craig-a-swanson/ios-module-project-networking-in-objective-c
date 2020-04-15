@@ -16,6 +16,7 @@
 		445DCAEA244505F7008FA840 /* LSIHourlyChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 445DCAE9244505F7008FA840 /* LSIHourlyChildViewController.m */; };
 		445DCAF62446104F008FA840 /* LSIDailyWeatherTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445DCAF52446104F008FA840 /* LSIDailyWeatherTableViewCell.m */; };
 		445DCAF924464920008FA840 /* WeatherFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 445DCAF824464920008FA840 /* WeatherFetcher.m */; };
+		445DCAFC2446BACB008FA840 /* HourlyWeatherCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 445DCAFB2446BACB008FA840 /* HourlyWeatherCollectionViewCell.m */; };
 		BD69313723FD905200C0DF09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD69313623FD905200C0DF09 /* AppDelegate.m */; };
 		BD69313A23FD905200C0DF09 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD69313923FD905200C0DF09 /* SceneDelegate.m */; };
 		BD69314223FD905300C0DF09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD69314123FD905300C0DF09 /* Assets.xcassets */; };
@@ -75,6 +76,8 @@
 		445DCAF52446104F008FA840 /* LSIDailyWeatherTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSIDailyWeatherTableViewCell.m; sourceTree = "<group>"; };
 		445DCAF724464920008FA840 /* WeatherFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherFetcher.h; sourceTree = "<group>"; };
 		445DCAF824464920008FA840 /* WeatherFetcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherFetcher.m; sourceTree = "<group>"; };
+		445DCAFA2446BACB008FA840 /* HourlyWeatherCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HourlyWeatherCollectionViewCell.h; sourceTree = "<group>"; };
+		445DCAFB2446BACB008FA840 /* HourlyWeatherCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HourlyWeatherCollectionViewCell.m; sourceTree = "<group>"; };
 		BD69313223FD905200C0DF09 /* DailyWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD69313523FD905200C0DF09 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BD69313623FD905200C0DF09 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -141,6 +144,15 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		445DCAFD2446C956008FA840 /* Model Controller */ = {
+			isa = PBXGroup;
+			children = (
+				445DCAF724464920008FA840 /* WeatherFetcher.h */,
+				445DCAF824464920008FA840 /* WeatherFetcher.m */,
+			);
+			name = "Model Controller";
+			sourceTree = "<group>";
+		};
 		BD69312923FD905200C0DF09 = {
 			isa = PBXGroup;
 			children = (
@@ -167,14 +179,15 @@
 				BD69313823FD905200C0DF09 /* SceneDelegate.h */,
 				BD69313923FD905200C0DF09 /* SceneDelegate.m */,
 				BD69317423FD91D700C0DF09 /* Main.storyboard */,
-				445DCAF724464920008FA840 /* WeatherFetcher.h */,
-				445DCAF824464920008FA840 /* WeatherFetcher.m */,
+				445DCAFD2446C956008FA840 /* Model Controller */,
 				445DCADC24450225008FA840 /* LSIWeatherSummaryViewController.h */,
 				445DCADD24450225008FA840 /* LSIWeatherSummaryViewController.m */,
 				445DCADF2445023F008FA840 /* LSICurrentWeatherChildViewController.h */,
 				445DCAE02445023F008FA840 /* LSICurrentWeatherChildViewController.m */,
 				445DCAE8244505F7008FA840 /* LSIHourlyChildViewController.h */,
 				445DCAE9244505F7008FA840 /* LSIHourlyChildViewController.m */,
+				445DCAFA2446BACB008FA840 /* HourlyWeatherCollectionViewCell.h */,
+				445DCAFB2446BACB008FA840 /* HourlyWeatherCollectionViewCell.m */,
 				445DCAF42446104F008FA840 /* LSIDailyWeatherTableViewCell.h */,
 				445DCAF52446104F008FA840 /* LSIDailyWeatherTableViewCell.m */,
 				445DCAAF243E3C6B008FA840 /* Model */,
@@ -364,6 +377,7 @@
 				445DCAC62442AF80008FA840 /* LSICurrentWeather.m in Sources */,
 				BD69315E23FD907800C0DF09 /* LSIWeatherViewController.m in Sources */,
 				BD69317223FD918B00C0DF09 /* LSIWeatherIcons.m in Sources */,
+				445DCAFC2446BACB008FA840 /* HourlyWeatherCollectionViewCell.m in Sources */,
 				BD69314823FD905300C0DF09 /* main.m in Sources */,
 				445DCAC924439FB0008FA840 /* LSIDailyForcast.m in Sources */,
 				445DCAC32442AEDA008FA840 /* LSIWeatherForcast.m in Sources */,

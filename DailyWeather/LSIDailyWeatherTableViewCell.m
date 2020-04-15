@@ -43,8 +43,8 @@
 
 - (void)updateViews {
     _icon.image = [LSIWeatherIcons weatherImageForIconName:_dailyForecast.icon];
-    _highTempLabel.text = [NSString stringWithFormat:@"%d", _dailyForecast.temperatureHigh.intValue];
-    _lowTempLabel.text = [NSString stringWithFormat:@"%d", _dailyForecast.temperatureLow.intValue];
+    _highTempLabel.text = [NSString stringWithFormat:@"%d°", _dailyForecast.temperatureHigh.intValue];
+    _lowTempLabel.text = [NSString stringWithFormat:@"%d°", _dailyForecast.temperatureLow.intValue];
 }
 
 @end
