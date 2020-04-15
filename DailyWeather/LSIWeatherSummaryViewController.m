@@ -36,7 +36,7 @@
 @property (nonatomic) WeatherFetcher *weatherFetcher;
 
 // MARK: - Outlets
-@property (strong, nonatomic) IBOutlet UITableView *dailyTableView;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -143,6 +143,7 @@
             self.dailyForecast = weatherForcast.daily;
             
             self.currentWeatherVC.currentForecast = self.currentForecast;
+            [self.tableView reloadData];
             
             NSLog(@"Current Weather Apparent Temp: %@", weatherForcast.currently.apparentTemperature);
             NSLog(@"Daily Weather Count: %d", self.dailyForecast.dailies.count);
@@ -150,22 +151,6 @@
             
         });
     }];
-    
-    
-    
-    
-//    NSData *weatherData = loadFile(@"Weather.json", [LSIWeatherSummaryViewController class]);
-//    NSError *jsonError = nil;
-//    NSDictionary *weatherJson = [NSJSONSerialization JSONObjectWithData:weatherData options:0 error:&jsonError];
-//    if (jsonError) {
-//        NSLog(@"JSON Parsing error retrieving weather.json:", jsonError);
-//    }
-//
-//    LSIWeatherForcast *currentWeather = [[LSIWeatherForcast alloc] initWithCurrentDictionary:weatherJson];
-//
-//    self.currentForecast = currentWeather.currently;
-//    self.currentWeatherVC.currentForecast = self.currentForecast;
-    
 }
 
 - (void)updateViews {
@@ -186,12 +171,16 @@
 
 // MARK: - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 9;
+    return self.dailyForecast.dailies.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     LSIDailyWeatherTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DailyCell" forIndexPath:indexPath];
+    
+    
+    LSIDailyForcast *dailyWeather = [self.dailyForecast.dailies objectAtIndex:indexPath.row];
+    cell.dailyForecast = dailyWeather;
     
     return cell;
 }

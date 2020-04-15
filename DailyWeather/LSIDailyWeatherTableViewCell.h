@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class LSIDailyForcast;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LSIDailyWeatherTableViewCell : UITableViewCell
+
+@property (strong, nonatomic) LSIDailyForcast *dailyForecast;
 
 @end
 

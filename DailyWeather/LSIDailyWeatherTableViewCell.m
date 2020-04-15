@@ -7,6 +7,8 @@
 //
 
 #import "LSIDailyWeatherTableViewCell.h"
+#import "LSIDailyForcast.h"
+#import "LSIWeatherIcons.h"
 
 @interface LSIDailyWeatherTableViewCell ()
 
@@ -21,6 +23,8 @@
 
 @implementation LSIDailyWeatherTableViewCell
 
+@synthesize dailyForecast = _dailyForecast;
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -30,6 +34,17 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setDailyForecast:(LSIDailyForcast *)dailyForecast {
+    _dailyForecast = dailyForecast;
+    [self updateViews];
+}
+
+- (void)updateViews {
+    _icon.image = [LSIWeatherIcons weatherImageForIconName:_dailyForecast.icon];
+    _highTempLabel.text = [NSString stringWithFormat:@"%d", _dailyForecast.temperatureHigh.intValue];
+    _lowTempLabel.text = [NSString stringWithFormat:@"%d", _dailyForecast.temperatureLow.intValue];
 }
 
 @end
