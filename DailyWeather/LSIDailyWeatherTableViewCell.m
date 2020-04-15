@@ -42,6 +42,12 @@
 }
 
 - (void)updateViews {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"EEEE"];
+    NSString *dateString = [dateFormatter stringFromDate:_dailyForecast.time];
+    
+    _dayOfWeekLabel.text = dateString;
     _icon.image = [LSIWeatherIcons weatherImageForIconName:_dailyForecast.icon];
     _highTempLabel.text = [NSString stringWithFormat:@"%d°", _dailyForecast.temperatureHigh.intValue];
     _lowTempLabel.text = [NSString stringWithFormat:@"%d°", _dailyForecast.temperatureLow.intValue];

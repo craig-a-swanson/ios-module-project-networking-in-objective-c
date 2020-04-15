@@ -32,6 +32,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"h a"];
     NSString *dateString = [dateFormatter stringFromDate:_hourlyForecast.time];
+    
     _timeLabel.text = dateString;
     _icon.image = [LSIWeatherIcons weatherImageForIconName:_hourlyForecast.icon];
     _tempLabel.text = [NSString stringWithFormat:@"%d°", _hourlyForecast.temperature.intValue];
