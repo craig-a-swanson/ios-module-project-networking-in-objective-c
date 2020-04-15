@@ -30,6 +30,8 @@
 @property CLLocation *location;
 @property (nonatomic) CLPlacemark *placemark;
 @property (nonatomic) LSICurrentWeather *currentForecast;
+@property (nonatomic) LSIHourlyForcast *hourlyForecast;
+@property (nonatomic) LSIDailyForcast *dailyForecast;
 @property LSICurrentWeatherChildViewController *currentWeatherVC;
 @property (nonatomic) WeatherFetcher *weatherFetcher;
 
@@ -71,18 +73,8 @@
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startUpdatingLocation];
     
-    // Testing fetcher
-    self.weatherFetcher = [[WeatherFetcher alloc] init];
-    [self.weatherFetcher fetchTodaysWeather:^(LSIWeatherForcast * _Nullable weatherForcast, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Error fetching today's weather: %@", error);
-            return;
-        }
-        
-        NSLog(@"Current Weather Apparent Temp: %@", weatherForcast.currently.apparentTemperature);
-        NSLog(@"Daily Weather Count: %d", weatherForcast.daily.dailies.count);
-        NSLog(@"Hourly Weather Count: %d", weatherForcast.hourly.hourlies.count);
-    }];
+
+
 }
 
 //https://developer.apple.com/documentation/corelocation/converting_between_coordinates_and_user-friendly_place_names
@@ -137,17 +129,42 @@
 
 - (void)requestWeatherForLocation:(CLLocation *)location {
     
-    NSData *weatherData = loadFile(@"Weather.json", [LSIWeatherSummaryViewController class]);
-    NSError *jsonError = nil;
-    NSDictionary *weatherJson = [NSJSONSerialization JSONObjectWithData:weatherData options:0 error:&jsonError];
-    if (jsonError) {
-        NSLog(@"JSON Parsing error retrieving weather.json:", jsonError);
-    }
+    // Getting weather data with fetcher
+    self.weatherFetcher = [[WeatherFetcher alloc] init];
+    [self.weatherFetcher fetchTodaysWeather:^(LSIWeatherForcast * _Nullable weatherForcast, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error fetching today's weather: %@", error);
+            return;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.currentForecast = weatherForcast.currently;
+            self.hourlyForecast = weatherForcast.hourly;
+            self.dailyForecast = weatherForcast.daily;
+            
+            self.currentWeatherVC.currentForecast = self.currentForecast;
+            
+            NSLog(@"Current Weather Apparent Temp: %@", weatherForcast.currently.apparentTemperature);
+            NSLog(@"Daily Weather Count: %d", self.dailyForecast.dailies.count);
+            NSLog(@"Hourly Weather Count: %d", self.hourlyForecast.hourlies.count);
+            
+        });
+    }];
     
-    LSIWeatherForcast *currentWeather = [[LSIWeatherForcast alloc] initWithCurrentDictionary:weatherJson];
     
-    self.currentForecast = currentWeather.currently;
-    self.currentWeatherVC.currentForecast = self.currentForecast;
+    
+    
+//    NSData *weatherData = loadFile(@"Weather.json", [LSIWeatherSummaryViewController class]);
+//    NSError *jsonError = nil;
+//    NSDictionary *weatherJson = [NSJSONSerialization JSONObjectWithData:weatherData options:0 error:&jsonError];
+//    if (jsonError) {
+//        NSLog(@"JSON Parsing error retrieving weather.json:", jsonError);
+//    }
+//
+//    LSIWeatherForcast *currentWeather = [[LSIWeatherForcast alloc] initWithCurrentDictionary:weatherJson];
+//
+//    self.currentForecast = currentWeather.currently;
+//    self.currentWeatherVC.currentForecast = self.currentForecast;
     
 }
 
