@@ -1,7 +1,8 @@
 //
-//  LSIWeatherViewController.h
+//  LSIWeatherSummaryViewController.h
+//  DailyWeather
 //
-//  Created by Paul Solt on 2/6/20.
+//  Created by Craig Swanson on 4/13/20.
 //  Copyright © 2020 Lambda, Inc. All rights reserved.
 //
 
@@ -9,8 +10,7 @@
 
 typedef void (^LSILocationHandler)(CLPlacemark *placemark, NSError *error);
 
-@interface LSIWeatherViewController : UIViewController
-
+@interface LSIWeatherSummaryViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 //- (void)requestCurrentLocationWithCompletion:(LSILocationHandler)completionHandler;
 - (void)requestCurrentPlacemarkForLocation:(CLLocation *)location
@@ -18,6 +18,7 @@ typedef void (^LSILocationHandler)(CLPlacemark *placemark, NSError *error);
 
 
 - (void)requestWeatherForLocation:(CLLocation *)location;
+
 
 @end
 

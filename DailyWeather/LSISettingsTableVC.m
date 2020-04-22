@@ -21,15 +21,21 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsCell" forIndexPath:indexPath];
     
     if (indexPath.row == 0) {
+        cell.textLabel.text = @"Today's Weather v1.0";
+        cell.detailTextLabel.text = @"";
+        cell.textLabel.textColor = UIColor.systemGrayColor;
+    } else if (indexPath.row == 1) {
         cell.textLabel.text = @"Powered by Dark Sky";
-        cell.textLabel.textColor = UIColor.systemBlueColor;
+        cell.detailTextLabel.text = @"https://darksky.net/poweredby/";
+        cell.textLabel.textColor = UIColor.systemGrayColor;
+        cell.detailTextLabel.textColor = UIColor.systemBlueColor;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
@@ -38,7 +44,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == 0) {
+    if (indexPath.row == 1) {
         NSURL *url =  [NSURL URLWithString:@"https://darksky.net/poweredby/"];
         [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
     }
